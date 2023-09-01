@@ -1,5 +1,52 @@
-# Copyright (C) 2022 The Qt Company Ltd.
-# SPDX-License-Identifier: BSD-3-Clause
+project(qt6-qrhi-tests)
+cmake_minimum_required(VERSION 3.24)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+find_package(Qt6 COMPONENTS Core REQUIRED)
+
+#------------------------------------------------------------------
+# helper functions defined in QtTestHelpers.cmake is too complex
+# so we define some simple functions here.
+#------------------------------------------------------------------
+#include(${_qt_6_config_cmake_dir}/QtCMakeHelpers.cmake)
+#include(${_qt_6_config_cmake_dir}/QtResourceHelpers.cmake)
+#include(${_qt_6_config_cmake_dir}/QtTestHelpers.cmake)
+
+function(qt_internal_add_manual_test NAME)
+    cmake_parse_arguments(ARG "" "" "SOURCES;LIBRARIES" ${ARGN})
+
+    set(FOUND_COMPONENTS "")
+    foreach(lib ${ARG_LIBRARIES})
+        if(lib MATCHES "Qt::(.+)")
+            string(REGEX REPLACE "Qt::(.+)" "\\1" component ${lib})
+            if(NOT component MATCHES "Private$")
+                list(APPEND FOUND_COMPONENTS ${component})
+            endif()
+        endif()
+    endforeach()
+
+    find_package(Qt6 REQUIRED COMPONENTS ${FOUND_COMPONENTS})
+
+    add_executable(${NAME} ${ARG_SOURCES})
+
+    target_link_libraries(${NAME} PRIVATE ${ARG_LIBRARIES})
+
+endfunction()
+
+function(qt_internal_add_resource TARGET NAME)
+    cmake_parse_arguments(ARG "" "PREFIX" "FILES" ${ARGN})
+
+    qt_add_resources(${TARGET} ${NAME}
+        PREFIX ${ARG_PREFIX}
+        FILES ${ARG_FILES}
+    )
+message(db_add_resource: ${ARG_FILES})
+endfunction()
+
+#-----------------------------------------------------------------------
 
 add_subdirectory(hellominimalcrossgfxtriangle)
 add_subdirectory(compressedtexture_bc1)
