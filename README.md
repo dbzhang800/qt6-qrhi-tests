@@ -1,14 +1,6 @@
-## Introduction
+## About QRhi
 
-Examples in this repository are copied from the 6.5 branch of qtbase in the qtbase/tests/manual/rhi directory.
-
-### Build
-
-To build and run the code in this repository, please follow the steps below:
-
-1. Install the Vulkan SDK, which can be found at https://www.lunarg.com/vulkan-sdk/.
-
-### About QRhi
+QRhi(The Qt Rendering Hardware Interface) is an abstraction for hardware accelerated graphics APIs, such as, OpenGL, OpenGL ES, Direct3D, Metal, and Vulkan.
 
 * In Qt 6.5 or older version, the RHI (Rendering Hardware Interface) API is private.
 * In Qt 6.6, the RHI API is semi-public.
@@ -20,6 +12,21 @@ Documents can be found in:
 
 * https://doc-snapshots.qt.io/qt6-6.6/qrhi.html
 * https://doc-snapshots.qt.io/qt6-dev/qrhi.html
+
+### rhi tests
+
+Examples in this repository are copied from the 6.5 branch of qtbase in the qtbase/tests/manual/rhi directory.
+
+### Build
+
+To build and run the code in this repository, please follow the steps below:
+
+0. Install Qt 6.5
+1. Install the Vulkan SDK, which can be found at https://www.lunarg.com/vulkan-sdk/.
+2. Open the toplevel CMakeLists.txt in QtCreator
+3. Click build button
+
+
 
 ### Shader?
 
