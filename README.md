@@ -20,3 +20,20 @@ Documents can be found in:
 
 * https://doc-snapshots.qt.io/qt6-6.6/qrhi.html
 * https://doc-snapshots.qt.io/qt6-dev/qrhi.html
+
+### Shader?
+
+In these tests, shader files .comp/.vert/.frag have been compile to .qsb files already.
+
+You can regenerate them through the batch file buildshaders.bat.
+
+Step1: set proper environment
+```
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat" -arch=amd64
+D:\Qt\Online\6.5.0\msvc2019_64\bin\qtenv2.bat
+```
+
+Step2: run the batch file
+```
+buildshaders.bat
+```
